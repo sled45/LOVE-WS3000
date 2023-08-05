@@ -8,7 +8,7 @@ function love.load(arg)
   showTime = true
   require("draw")
   require("api")
-  require("flavors")
+  --require("flavors")
   settingsLoaded = loadConfig()
   if settingsLoaded then
     initAPI(config.latitude, config.longitude)
