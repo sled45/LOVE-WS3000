@@ -17,6 +17,9 @@ end
 function initAPI(latitude, longitude)
   local coordURL = "https://api.weather.gov/points/"..tostring(latitude)..","..tostring(longitude)
   local coordAPI, returnCode = http.request(coordURL)
+  if json.decode(coordAPI).status == 404 then
+    error("Conditions not available for your area. Raw JSON Code: \n"..coordAPI)
+  end
   local forecastURL = json.decode(coordAPI).properties.forecast
   local forecastAPI, returnCode = http.request(forecastURL)
   forecastJSON = json.decode(forecastAPI)
